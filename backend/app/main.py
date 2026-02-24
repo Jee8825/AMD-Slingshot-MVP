@@ -14,8 +14,6 @@ settings = get_settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup / shutdown lifecycle."""
-    # Ensure upload directory exists
-    os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
     # Auto-create tables for SQLite dev/test (Postgres uses Alembic migrations)
     if settings.DATABASE_URL.startswith("sqlite"):
         from app.database import engine, Base
@@ -46,7 +44,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve uploaded files
+# Serve uploaded files (ensure dir exists first)
+os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
 
