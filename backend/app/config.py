@@ -21,7 +21,8 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # AI (Gemini)
-    GEMINI_API_KEY: str = ""
+    GEMINI_API_KEY_1: str = ""
+    GEMINI_API_KEY_2: str = ""
 
     # File uploads
     UPLOAD_DIR: str = "./uploads"
