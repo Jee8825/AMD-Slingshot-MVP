@@ -61,6 +61,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } catch {
             // Token invalid or expired — clear everything
             localStorage.removeItem("access_token");
+            document.cookie = "access_token=; path=/; max-age=0";
             setUser(null);
             setRole(null);
         } finally {
@@ -80,6 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             } else {
                 // Token invalid or expired
                 localStorage.removeItem("access_token");
+                document.cookie = "access_token=; path=/; max-age=0";
                 setLoading(false);
             }
         } else {
@@ -90,6 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const login = async (creds: LoginRequest) => {
         const response = await api.post<TokenResponse>("/api/auth/login", creds);
         localStorage.setItem("access_token", response.access_token);
+        document.cookie = `access_token=${response.access_token}; path=/`;
 
         // Decode role from JWT immediately
         const payload = decodeToken(response.access_token);
@@ -107,6 +110,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             data
         );
         localStorage.setItem("access_token", response.access_token);
+        document.cookie = `access_token=${response.access_token}; path=/`;
 
         // Set user immediately from register response
         setUser(response.user);
@@ -116,6 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const logout = () => {
         localStorage.removeItem("access_token");
+        document.cookie = "access_token=; path=/; max-age=0";
         setUser(null);
         setRole(null);
     };

@@ -20,11 +20,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 // Match the backend schema
 interface LedgerEntry {
     id: number;
-    project_id: number;
-    disbursed_amount: number;
+    scheme_name: string;
+    amount: number;
+    beneficiary?: string;
+    disbursed_by: string;
+    description?: string;
     prev_hash: string;
     current_hash: string;
-    timestamp: string;
+    created_at: string;
 }
 
 export default function TransparencyPage() {
@@ -104,11 +107,13 @@ export default function TransparencyPage() {
                                 {ledgerEntries.map((entry) => (
                                     <TableRow key={entry.id} className="group">
                                         <TableCell className="font-medium text-gray-600 dark:text-gray-300">
-                                            {format(new Date(entry.timestamp), "MMM d, yyyy HH:mm")}
+                                            {entry.created_at && !isNaN(new Date(entry.created_at).getTime())
+                                                ? format(new Date(entry.created_at), "MMM d, yyyy HH:mm")
+                                                : "N/A"}
                                         </TableCell>
-                                        <TableCell>Project #{entry.project_id}</TableCell>
+                                        <TableCell>{entry.scheme_name}</TableCell>
                                         <TableCell className="font-semibold text-green-600 dark:text-green-400">
-                                            ₹{entry.disbursed_amount.toLocaleString("en-IN")}
+                                            ₹{(entry.amount || 0).toLocaleString("en-IN")}
                                         </TableCell>
                                         <TableCell className="text-right">
                                             <div className="flex items-center justify-end gap-2">

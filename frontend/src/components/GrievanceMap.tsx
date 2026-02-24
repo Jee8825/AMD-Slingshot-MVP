@@ -16,9 +16,9 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 if (typeof window !== "undefined") {
     delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
-        iconUrl: markerIcon.src,
-        iconRetinaUrl: markerIcon2x.src,
-        shadowUrl: markerShadow.src,
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
     });
 }
 
@@ -51,8 +51,8 @@ export default function GrievanceMap() {
         setLoading(true);
         setError("");
         try {
-            // Fetch only pending grievances as requested
-            const data = await api.get<Grievance[]>("/api/v1/grievances?status=pending");
+            // Fetch only submitted grievances as requested
+            const data = await api.get<Grievance[]>("/api/v1/grievances?status=SUBMITTED");
             setGrievances(data);
         } catch (err: any) {
             setError(err.message || "Failed to load map data.");
