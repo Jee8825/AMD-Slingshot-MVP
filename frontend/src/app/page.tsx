@@ -1,65 +1,119 @@
-import Image from "next/image";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, ShieldCheck, MapPin, BarChart3, Clock } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex min-h-screen flex-col bg-slate-50 select-none">
+      {/* Navbar */}
+      <header className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="container mx-auto px-4 md:px-6 flex h-16 items-center justify-between">
+          <div className="flex items-center gap-2 font-bold text-xl text-slate-900">
+            <ShieldCheck className="h-6 w-6 text-green-600" />
+            <span>DigiGram Pro</span>
+          </div>
+          <nav className="flex items-center gap-4">
+            <Link href="/transparency" className="text-sm font-medium hover:text-green-600 transition-colors">
+              Ledger
+            </Link>
+            <Link href="/login">
+              <Button variant="outline" className="border-slate-200 hidden sm:flex">Login</Button>
+            </Link>
+            <Link href="/register">
+              <Button className="bg-green-600 hover:bg-green-700 text-white">Get Started</Button>
+            </Link>
+          </nav>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="w-full py-24 md:py-32 lg:py-48 bg-gradient-to-b from-white to-slate-50">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-8 text-center">
+              <div className="space-y-4 max-w-3xl">
+                <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-slate-900">
+                  Digital Governance for <span className="text-green-600">Modern Villages</span>
+                </h1>
+                <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                  DigiGram Pro bridges the gap between citizens and officials. Report grievances instantly with geotagging, track public project funds on an immutable ledger, and ensure task completion with AI-powered verification.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 min-w-[300px]">
+                <Link href="/register" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full bg-green-600 hover:bg-green-700 text-white gap-2">
+                    Citizen Portal <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/login" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="w-full border-slate-200">
+                    Official Login
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature Section */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-slate-900 mb-4">Core Features</h2>
+              <p className="max-w-[700px] mx-auto text-slate-500 md:text-lg">Experience the next generation of rural administration tools designed to end corruption and prioritize rapid development.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="border-0 shadow-lg bg-slate-50/50">
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                  <div className="p-3 bg-blue-100 rounded-full text-blue-600">
+                    <MapPin className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">Geo-Tagged Grievances</h3>
+                  <p className="text-slate-500">
+                    Citizens can submit civic issues with precise GPS coordinates, allowing officials to view all problems directly on an interactive map.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg bg-slate-50/50">
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                  <div className="p-3 bg-purple-100 rounded-full text-purple-600">
+                    <BarChart3 className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">Immutable Audit Ledger</h3>
+                  <p className="text-slate-500">
+                    All project funding allocations are tracked cryptographically. Prevent fund diversion with a fully transparent public financial trail.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-0 shadow-lg bg-slate-50/50">
+                <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
+                  <div className="p-3 bg-green-100 rounded-full text-green-600">
+                    <ShieldCheck className="h-8 w-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900">AI Image Verification</h3>
+                  <p className="text-slate-500">
+                    Officials cannot close tasks without uploading photographic proof. Our Gemini-powered AI verifies completion autonomously.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="w-full py-6 border-t bg-slate-50">
+        <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between text-sm text-slate-500">
+          <p>© 2026 DigiGram Pro. All rights reserved.</p>
+          <div className="flex gap-4 mt-4 md:mt-0">
+            <Link href="/transparency" className="hover:text-slate-900 transition-colors">Public Transparency Ledger</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
