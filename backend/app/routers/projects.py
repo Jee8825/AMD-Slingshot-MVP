@@ -10,7 +10,7 @@ from app.models.user import User
 from app.models.project import Project
 from app.schemas.project import ProjectCreate, ProjectUpdate, ProjectOut
 from app.routers.auth import get_current_user
-from app.routers.ai_verification import mock_ai_verify_image
+from app.routers.ai_verification import real_ai_verify_image
 from app.models.audit_ledger import AuditLedger
 from app.utils.hashing import generate_ledger_hash
 
@@ -96,7 +96,7 @@ async def update_project(
         
         # Integrate with AI verification
         if file:
-            ai_result = await mock_ai_verify_image(file)
+            ai_result = await real_ai_verify_image(file)
             if ai_result["status"] != "VERIFIED":
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
